@@ -14,7 +14,7 @@ class ShoppingCart
         $this->total = $total;
     }
 
-    public function addItemToCart(shoppingCartItem $shoppingCartItem)
+    public function addItemToCart(shoppingCartItem $shoppingCartItem, $equation)
     {
         //checkForExceptionBeforeAddingItemToCart($shoppingCartItem);
         if ($shoppingCartItem instanceof shoppingCartItem)
@@ -22,8 +22,7 @@ class ShoppingCart
             $itemNumberInCart = $this->getNumberOfitemsinCart();
             $this->shoppingCartItem[] = $shoppingCartItem;
             $cartItemSalePrice = $this->shoppingCartItem[$itemNumberInCart]->getShoppingCartItemSalePrice();
-            $add ='add';
-            $this->calculateRunningTotal($add,$cartItemSalePrice);
+            $this->calculateRunningTotal($equation,$cartItemSalePrice);
             $this->increaseNumberOfItemsInCartCounter();
         }
     }

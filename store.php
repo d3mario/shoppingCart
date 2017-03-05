@@ -14,14 +14,15 @@ include_once ('shoppingCart.php');
 
     $Cartitem = new shoppingCartItem($shoppingCartItemName,$shoppingCartItemSalePrice, $shoppingCartItemProductID);
     $shoppingCart = new ShoppingCart($total);
-    $shoppingCart ->addItemToCart($Cartitem);
+    $equation = "add";
+    $shoppingCart ->addItemToCart($Cartitem, $equation);
 
     $shoppingCartItemName ="HP Monitor";
     $shoppingCartItemSalePrice = "25.30";
     $shoppingCartItemProductID = "1002";
 
     $Cartitem = new shoppingCartItem($shoppingCartItemName,$shoppingCartItemSalePrice, $shoppingCartItemProductID);
-    $shoppingCart ->addItemToCart($Cartitem);
+    $shoppingCart ->addItemToCart($Cartitem, $equation);
 
 
     echo "Shopping Cart Balance: $ ". $shoppingCart->getShoppingCartBalance();
