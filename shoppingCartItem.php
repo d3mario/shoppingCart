@@ -10,7 +10,8 @@ class shoppingCartItem
     private $shoppingCartItemImage;
     private $shoppingCartItemTotalPrice;
     private $shoppingCartItemQuantity;
-
+    //test
+    
     public function __construct($shoppingCartItemName, $shoppingCartItemSalePrice, $shoppingCartItemProductID)
     {
         $this->shoppingCartItemProductID = $shoppingCartItemProductID;
