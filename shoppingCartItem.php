@@ -12,18 +12,44 @@ class shoppingCartItem
     private $shoppingCartItemQuantity;
     //test
     
-    public function __construct($shoppingCartItemName, $shoppingCartItemSalePrice, $shoppingCartItemProductID)
+    public function __construct(/*$shoppingCartItemName,*/ $shoppingCartItemSalePrice, $shoppingCartItemProductID)
     {
         $this->shoppingCartItemProductID = $shoppingCartItemProductID;
-        $this->shoppingCartItemName = $shoppingCartItemName;
+        //$this->shoppingCartItemName = $shoppingCartItemName;
         $this->shoppingCartItemSalePrice = $shoppingCartItemSalePrice;
     }
 
+
     public function setShoppingCartItemName($shoppingCartItemName)
     {
-        $this->$shoppingCartItemName = $shoppingCartItemName;
+        $lengthError = $this->checkForExceptionBeforeUpdating($shoppingCartItemName);
+        if ($lengthError == 0)
+        {
+            echo "not valid";
+        }
+        else
+            {
+                $this->shoppingCartItemName = $shoppingCartItemName;
+            }
+
     }
 
+    private function checkForExceptionBeforeUpdating($shoppingCartItem)
+    {
+        try
+        {
+            if (strlen($shoppingCartItem) <= 0)
+            {
+                throw new Exception("Invalid char length, must be at least 1 character long.");
+            }
+        } catch (Exception $e) {
+            echo 'Error: ' . $e->getMessage();
+            return 0;
+        }
+
+        return 1;
+
+    }
     public function setFoodItemCategory($foodItemCategory)
     {
         $this->shoppingCartItemName = $foodItemCategory;

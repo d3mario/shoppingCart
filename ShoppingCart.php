@@ -117,5 +117,10 @@ class ShoppingCart
     {
         return $this->total;
     }
+
+    public function getShoppingCartItem($arrayItem)
+    {
+        return $this->shoppingCartItem[$arrayItem];
+    }
 }
 ?>

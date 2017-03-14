@@ -12,7 +12,8 @@ include_once ('shoppingCart.php');
     $shoppingCartItemSalePrice = "20.00";
     $shoppingCartItemProductID = "1001";
 
-    $Cartitem = new shoppingCartItem($shoppingCartItemName,$shoppingCartItemSalePrice, $shoppingCartItemProductID);
+    $Cartitem = new shoppingCartItem(/*$shoppingCartItemName,*/$shoppingCartItemSalePrice, $shoppingCartItemProductID);
+    $Cartitem->setShoppingCartItemName($shoppingCartItemName);
     $shoppingCart = new ShoppingCart($total);
     $equation = "add";
     $shoppingCart ->addItemToCart($Cartitem, $equation);
@@ -21,13 +22,14 @@ include_once ('shoppingCart.php');
     $shoppingCartItemSalePrice = "25.30";
     $shoppingCartItemProductID = "1002";
 
-    $Cartitem = new shoppingCartItem($shoppingCartItemName,$shoppingCartItemSalePrice, $shoppingCartItemProductID);
+    $Cartitem = new shoppingCartItem(/*$shoppingCartItemName,*/$shoppingCartItemSalePrice, $shoppingCartItemProductID);
+    $Cartitem->setShoppingCartItemName("");
     $shoppingCart ->addItemToCart($Cartitem, $equation);
 
 
     echo "Shopping Cart Balance: $ ". $shoppingCart->getShoppingCartBalance();
     echo "Number of items in cart:  ".$shoppingCart->getNumberOfitemsinCart();
-
+    //echo "Item Name:  ".$shoppingCart->getShoppingCartItem(1)->getShoppingCartItemName();
 
 
 ?>
