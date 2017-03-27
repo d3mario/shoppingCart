@@ -27,7 +27,7 @@ include_once ('shoppingCart.php');
     $shoppingCart ->addItemToCart($Cartitem, $equation);
 
 
-    echo "Shopping Cart Balance: $ ". $shoppingCart->getShoppingCartBalance();
+    echo "Shopping Cart Balance:". $shoppingCart->getShoppingCartBalance();
     echo "Number of items in cart:  ".$shoppingCart->getNumberOfitemsinCart();
     //echo "Item Name:  ".$shoppingCart->getShoppingCartItem(1)->getShoppingCartItemName();
 

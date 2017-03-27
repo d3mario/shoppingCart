@@ -8,26 +8,30 @@ class ShoppingCart
     private $NOVALUE = 0.00;
     private $hasCoupon = False;
     private $numberOfitemsinCart = 0;
+    private $equation = "";
+    public $MAX_CART_QUANITY = 100;
+
 
     public function __construct($total)
     {
         $this->total = $total;
     }
 
-    public function addItemToCart(shoppingCartItem $shoppingCartItem, $equation)
+    public function addItemToCart(shoppingCartItem $shoppingCartItem)
     {
         //checkForExceptionBeforeAddingItemToCart($shoppingCartItem);
         if ($shoppingCartItem instanceof shoppingCartItem)
         {
+            $this->equation="add";
             $itemNumberInCart = $this->getNumberOfitemsinCart();
             $this->shoppingCartItem[] = $shoppingCartItem;
             $cartItemSalePrice = $this->shoppingCartItem[$itemNumberInCart]->getShoppingCartItemSalePrice();
-            $this->calculateRunningTotal($equation,$cartItemSalePrice);
+            $this->calculateRunningTotal($this->equation,$cartItemSalePrice);
             $this->increaseNumberOfItemsInCartCounter();
         }
     }
 
-    private function calculateRunningTotal($equation = "add", $amount)
+    private function calculateRunningTotal($equation, $amount)
     {
         switch( $equation )
         {
@@ -66,9 +70,34 @@ class ShoppingCart
 
     private function increaseNumberOfItemsInCartCounter()
     {
+        echo 'Item was added to the cart successfully';
         $this->numberOfitemsinCart++;
     }
 
+    private function updateNumberOfItemsInCartCounter($equation)
+    {
+        if ($this->numberOfitemsinCart <= $this->MAX_CART_QUANITY )
+        {
+            try{
+                echo 'Item was added to the cart successfully';
+                switch ($equation)
+                {
+                    case "add":
+                        $this->increaseNumberOfItemsInCartCounter();
+                        break;
+                    case "subtract":
+                        $this->decreaseNumberOfItemsInCartCounter();
+                        break;
+                    default:
+                        $this->numberOfitemsinCart += $this->NOVALUE;
+                        break;
+                }
+            } catch (Exception $e) {
+                echo 'Error: ' . $e->getMessage();
+            }
+        }
+
+    }
     /**
      * @return int
      */
@@ -77,13 +106,14 @@ class ShoppingCart
         return $this->numberOfitemsinCart;
     }
     /**
-     * @return string
+     * @return Grand total of the shopping cart in US Currency
      */
-    public function getTotal()
+   /* public function getTotal()
     {
-        return $this->total;
+        setlocale(LC_MONETARY, "en_US");
+        return $currencyTotal = money_format("%10.2n", $this->total);
     }
-
+*/
     /**
      * @param string $total
      * @return ShoppingCart
@@ -113,9 +143,16 @@ class ShoppingCart
         }
         return $this;
     }
+
+    /**
+     * @return string $currencyTotal
+     * @internal param string $currencyTotal
+     * @internal param string $total Returns $currencyTotal which stores the shopping cart balance after
+     * formating $this->total with two decimal places
+     */
     public function getShoppingCartBalance()
     {
-        return $this->total;
+        return '$'.$currencyTotal = number_format($this->total, 2).' ';
     }
 
     public function getShoppingCartItem($arrayItem)
